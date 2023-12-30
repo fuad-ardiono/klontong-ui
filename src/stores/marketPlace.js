@@ -21,17 +21,6 @@ export const useMarketPlaceStore = defineStore('marketPlace', () => {
     marketPlaceList.value = response
   }
 
-  // function fetchSampleHistory() {
-  //   axios
-  //     .get(`data-sources/history.json`)
-  //     .then((result) => {
-  //       history.value = result?.data?.data
-  //     })
-  //     .catch((error) => {
-  //       alert(error.message)
-  //     })
-  // }
-
   return {
     marketPlaceDetail,
     marketPlaceList,

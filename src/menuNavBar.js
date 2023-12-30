@@ -1,6 +1,7 @@
 import {
   mdiLogout,
   mdiThemeLightDark,
+  mdiLogin
 } from '@mdi/js'
 
 export default [
@@ -11,7 +12,13 @@ export default [
     isToggleLightDark: true
   },
   {
+    icon: mdiLogin,
+    label: 'Login',
+    isToggleLogin: true
+  },
+  {
     isCurrentUser: true,
+    label: 'AuthenticatedUser',
     menu: [
       {
         icon: mdiLogout,
@@ -19,5 +26,5 @@ export default [
         isLogout: true
       }
     ]
-  }
+  },
 ]

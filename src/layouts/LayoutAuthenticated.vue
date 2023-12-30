@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router'
 import menuAside from '@/menuAside.js'
 import menuNavBar from '@/menuNavBar.js'
 import { useDarkModeStore } from '@/stores/darkMode.js'
+import { useAuthStore } from '@/stores/auth.js'
 import BaseIcon from '@/components/BaseIcon.vue'
 import NavBar from '@/components/NavBar.vue'
 import NavBarItemPlain from '@/components/NavBarItemPlain.vue'
@@ -14,6 +15,7 @@ import FooterBar from '@/components/FooterBar.vue'
 const layoutAsidePadding = 'xl:pl-60'
 
 const darkModeStore = useDarkModeStore()
+const authStore = useAuthStore()
 
 const router = useRouter()
 
@@ -31,7 +33,12 @@ const menuClick = (event, item) => {
   }
 
   if (item.isLogout) {
-    //
+    authStore.doLogout()
+    router.push('/')
+  }
+
+  if (item.isToggleLogin) {
+    router.push('/login')
   }
 }
 </script>
