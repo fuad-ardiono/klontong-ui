@@ -1,13 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { getCookie } from '@/utils/browserUtils'
 
 const routes = [
   {
     meta: {
-      title: 'Product'
+      title: 'Marketplace'
     },
-    path: '/product',
-    name: 'product',
+    path: '/',
+    name: 'marketplace',
     component: () => import('@/views/ProductView.vue')
   },
   {
@@ -76,12 +75,12 @@ const router = createRouter({
   }
 })
 
-router.beforeEach(async(to) => {
-  const authCookie = getCookie('authCookie')
+// router.beforeEach(async(to) => {
+//   const authCookie = getCookie('authCookie')
 
-  if (!authCookie && to.path !== '/login') {
-    router.push('/login')
-  }
-})
+//   if (!authCookie && to.path !== '/login') {
+//     router.push('/login')
+//   }
+// })
 
 export default router
