@@ -11,6 +11,7 @@ import { useMarketPlaceStore } from '@/stores/marketPlace'
 import { rupiah } from '@/utils/currencyUtils'
 import debounce from '@/utils/debounceUtils'
 import { useDarkModeStore } from '@/stores/darkMode'
+import router from '@/router'
 
 const filter = reactive({
   name: ''
@@ -86,6 +87,10 @@ const handleFilter = debounce(
     await marketPlaceStore.fetchMarketPlace(1, 16, filter.name),
   500)
 
+function handleViewProduct(productId) {
+  router.push(`/marketplace/${productId}`)
+}
+
 onBeforeMount(async () => {
   await marketPlaceStore.fetchMarketPlace(1, 16)
 })
@@ -108,7 +113,7 @@ onBeforeMount(async () => {
       <CardBox class="mb-6">
         <div class="grid grid-cols-4 gap-4 max-sm:grid-cols-1 max-sm:gap-4">
           <div v-for="(item, index) in marketPlaceStore.marketPlaceList.paginationData" :key="index"
-            class="flex flex-col bg-stone-200 p-2 cursor-pointer rounded-md" :class="{ 'bg-stone-700': darkModeStore.isEnabled == true }">
+            class="flex flex-col bg-stone-200 p-2 cursor-pointer rounded-md" :class="{ 'bg-stone-700': darkModeStore.isEnabled == true }" @click="handleViewProduct(item.product_id)">
             <div>
               <img :src="imageStorage[index]" alt="">
             </div>

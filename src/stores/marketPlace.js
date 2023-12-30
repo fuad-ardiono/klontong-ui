@@ -8,7 +8,7 @@ export const useMarketPlaceStore = defineStore('marketPlace', () => {
     paginationData: []
   })
 
-  const marketPlaceDetail = ref({})
+  const marketPlaceDetail = ref(null)
 
   async function fetchMarketPlace(page, pageSize, filter='') {
     let link = `/marketplace?page=${page}&pageSize=${pageSize}`
@@ -21,9 +21,15 @@ export const useMarketPlaceStore = defineStore('marketPlace', () => {
     marketPlaceList.value = response
   }
 
+  async function fetchMarketPlaceDetail(productId) {
+    const { data: { data: response } } = await axios.get(`${import.meta.env.VITE_APP_API_BASE_URL}/marketplace/${productId}`)
+    marketPlaceDetail.value = response
+  }
+
   return {
     marketPlaceDetail,
     marketPlaceList,
-    fetchMarketPlace
+    fetchMarketPlace,
+    fetchMarketPlaceDetail
   }
 })

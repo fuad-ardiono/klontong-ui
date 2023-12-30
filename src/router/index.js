@@ -7,7 +7,15 @@ const routes = [
     },
     path: '/',
     name: 'marketplace',
-    component: () => import('@/views/ProductView.vue')
+    component: () => import('@/views/MarketplaceView.vue')
+  },
+  {
+    meta: {
+      title: 'Product'
+    },
+    path: '/marketplace/:productId',
+    name: 'product',
+    component: () => import('@/views/MarketplaceDetailView.vue')
   },
   {
     meta: {
