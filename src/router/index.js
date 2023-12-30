@@ -3,6 +3,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     meta: {
+      title: 'Add Product'
+    },
+    path: '/add-product',
+    name: 'add-product',
+    component: () => import('@/views/AddProductView.vue')
+  },
+  {
+    meta: {
       title: 'Marketplace'
     },
     path: '/',
@@ -22,7 +30,7 @@ const routes = [
       title: 'Register'
     },
     path: '/register',
-    name: 'product',
+    name: 'register',
     component: () => import('@/views/RegisterView.vue')
   },
   {
