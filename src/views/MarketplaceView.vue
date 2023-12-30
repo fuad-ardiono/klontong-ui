@@ -11,13 +11,16 @@ import { useMarketPlaceStore } from '@/stores/marketPlace'
 import { rupiah } from '@/utils/currencyUtils'
 import debounce from '@/utils/debounceUtils'
 import { useDarkModeStore } from '@/stores/darkMode'
-import router from '@/router'
+import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
 
 const filter = reactive({
   name: ''
 })
 const marketPlaceStore = useMarketPlaceStore()
 const darkModeStore = useDarkModeStore()
+const authStore = useAuthStore()
+const router = useRouter()
 
 const currentPage = ref(1)
 
@@ -101,9 +104,9 @@ onBeforeMount(async () => {
   <LayoutAuthenticated>
     <SectionMain>
       <SectionTitleLineWithButton :icon="mdiShoppingOutline" title="Marketplace" main>
-        <!-- TODO: Render if logged in <slot>
-          <BaseButton :icon="mdiPlus" color="whiteDark" label="Add Product"/>
-        </slot> -->
+        <slot v-if="authStore.authUser.isAuthenticated">
+          <BaseButton :icon="mdiPlus" to="/add-product" color="whiteDark" label="Add Product"/>
+        </slot>
       </SectionTitleLineWithButton>
       <div class="flex my-3 justify-end max-sm:flex-col max-sm:space-y-3">
         <FormControl

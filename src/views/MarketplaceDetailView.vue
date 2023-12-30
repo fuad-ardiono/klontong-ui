@@ -26,7 +26,7 @@ const imageStorage = computed(() => {
     if (marketPlaceStore.marketPlaceDetail.product_meta.image.includes('https')) {
       return marketPlaceStore.marketPlaceDetail.product_meta.image
     } else {
-      return `${import.meta.env.VITE_APP_API_BASE_URL}${marketPlaceStore.marketPlaceDetail.product_meta.image}`
+      return `${import.meta.env.VITE_APP_API_BASE_URL}/${marketPlaceStore.marketPlaceDetail.product_meta.image}`
     }
   }
 
