@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router'
-import { mdiAccount, mdiAsterisk } from '@mdi/js'
+import { mdiAccount, mdiAsterisk, mdiEmail, mdiPound } from '@mdi/js'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
 import FormField from '@/components/FormField.vue'
@@ -16,10 +16,10 @@ const router = useRouter()
 
 const submit = async () => {
   try {
-    await authStore.doLogin()
-    router.push('/')
+    await authStore.doRegister()
+    router.push('/login')
   } catch {
-    throw Error('Failed to authenticate')
+    throw Error('Failed to register')
   }
 }
 </script>
@@ -28,19 +28,41 @@ const submit = async () => {
   <LayoutGuest>
     <SectionFullScreen v-slot="{ cardClass }" bg="purplePink">
       <CardBox :class="cardClass" is-form @submit.prevent="submit">
-        <FormField label="Login" help="Please enter your email">
+        <h3 class="font-bold mb-5">Register Form</h3>
+
+        <FormField label="Name" help="Please enter your name">
           <FormControl
-            v-model="authStore.payload.email"
+            v-model="authStore.payloadRegister.name"
             :icon="mdiAccount"
-            name="login"
+            name="name"
+            autocomplete="name"
+            placeholder="John Doe"
+          />
+        </FormField>
+
+        <FormField label="Email" help="Please enter your email">
+          <FormControl
+            v-model="authStore.payloadRegister.email"
+            :icon="mdiEmail"
+            name="email"
             autocomplete="email"
-            placeholder="Email"
+            placeholder="example@example.com"
+          />
+        </FormField>
+
+        <FormField label="Username" help="Please enter your username">
+          <FormControl
+            v-model="authStore.payloadRegister.username"
+            :icon="mdiPound"
+            name="username"
+            autocomplete="username"
+            placeholder="username"
           />
         </FormField>
 
         <FormField label="Password" help="Please enter your password">
           <FormControl
-            v-model="authStore.payload.password"
+            v-model="authStore.payloadRegister.password"
             :icon="mdiAsterisk"
             type="password"
             name="password"
@@ -51,9 +73,8 @@ const submit = async () => {
 
         <template #footer>
           <BaseButtons>
-            <BaseButton type="submit" color="info" label="Login" />
-            <BaseButton to="/" color="info" outline label="Back" />
-            <BaseButton to="/register" color="contrast" label="Register" />
+            <BaseButton type="submit" color="info" label="Register" />
+            <BaseButton to="/login" color="info" outline label="Back" />
           </BaseButtons>
         </template>
       </CardBox>

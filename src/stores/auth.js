@@ -12,8 +12,29 @@ export const useAuthStore = defineStore('auth', () => {
     isAuthenticated: false
   })
 
+  const payloadRegister = reactive({
+    email: '',
+    password: '',
+    username: '',
+    name: ''
+  })
+
+  async function doRegister() {
+    const { data: { data: response } } = await axios.post(
+      `${import.meta.env.VITE_APP_API_BASE_URL}/auth/register`,
+      payloadRegister,
+      { headers: { "Content-Type": 'application/json' } }
+    )
+
+    return response
+  }
+
   async function doLogin() {
-    const { data: { data: response } } = await axios.post(`${import.meta.env.VITE_APP_API_BASE_URL}/auth/login`, payload, { headers: { "Content-Type": 'application/json' } })
+    const { data: { data: response } } = await axios.post(
+      `${import.meta.env.VITE_APP_API_BASE_URL}/auth/login`,
+      payload,
+      { headers: { "Content-Type": 'application/json' } }
+    )
 
     localStorage.setItem('auth', response.token)
     parseToken()
@@ -43,6 +64,8 @@ export const useAuthStore = defineStore('auth', () => {
     doLogout,
     parseToken,
     payload,
-    authUser
+    authUser,
+    payloadRegister,
+    doRegister
   }
 })
