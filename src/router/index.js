@@ -19,11 +19,11 @@ const routes = [
   },
   {
     meta: {
-      title: 'Category'
+      title: 'Register'
     },
-    path: '/category',
-    name: 'category',
-    component: () => import('@/views/CategoryView.vue')
+    path: '/register',
+    name: 'product',
+    component: () => import('@/views/RegisterView.vue')
   },
   {
     meta: {
