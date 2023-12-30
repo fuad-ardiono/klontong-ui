@@ -10,11 +10,13 @@ import { onBeforeMount, reactive, computed, ref } from 'vue'
 import { useMarketPlaceStore } from '@/stores/marketPlace'
 import { rupiah } from '@/utils/currencyUtils'
 import debounce from '@/utils/debounceUtils'
+import { useDarkModeStore } from '@/stores/darkMode'
 
 const filter = reactive({
   name: ''
 })
 const marketPlaceStore = useMarketPlaceStore()
+const darkModeStore = useDarkModeStore()
 
 const currentPage = ref(1)
 
@@ -104,9 +106,9 @@ onBeforeMount(async () => {
           @input="handleFilter()" />
       </div>
       <CardBox class="mb-6">
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid grid-cols-4 gap-4 max-sm:grid-cols-1 max-sm:gap-4">
           <div v-for="(item, index) in marketPlaceStore.marketPlaceList.paginationData" :key="index"
-            class="flex flex-col bg-stone-200 p-2 cursor-pointer rounded-md">
+            class="flex flex-col bg-stone-200 p-2 cursor-pointer rounded-md" :class="{ 'bg-stone-700': darkModeStore.isEnabled == true }">
             <div>
               <img :src="imageStorage[index]" alt="">
             </div>

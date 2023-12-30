@@ -75,12 +75,4 @@ const router = createRouter({
   }
 })
 
-// router.beforeEach(async(to) => {
-//   const authCookie = getCookie('authCookie')
-
-//   if (!authCookie && to.path !== '/login') {
-//     router.push('/login')
-//   }
-// })
-
 export default router
