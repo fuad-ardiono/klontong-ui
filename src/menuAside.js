@@ -4,8 +4,8 @@ import {
 
 export default [
   {
-    to: '/product',
-    label: 'Product',
+    to: '/',
+    label: 'Marketplace',
     icon: mdiShoppingOutline
   }
 ]
